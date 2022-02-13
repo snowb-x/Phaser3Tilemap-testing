@@ -3,6 +3,7 @@ import { debugDraw } from '../utils/debug'
 import { createLizardAnims } from '../anims/EnemyAnims'
 import { createCharacterAnims } from '../anims/CharacterAnims'
 import Lizard from '../enemies/Lizard'
+import '../characters/Faune'
 
 export default class Game extends Phaser.Scene
 {
@@ -12,6 +13,8 @@ export default class Game extends Phaser.Scene
 
     /** @type {Phaser.Physics.Arcade.Sprite} */
     faune
+
+    hit = 0    
 
 	constructor()
 	{
@@ -40,6 +43,7 @@ export default class Game extends Phaser.Scene
         //DEBUG wall layer collider
         //debugDraw(wallsLayer, this)
 
+        this.faune = this.add.faune(100,128, 'faune')
         this.faune = this.physics.add.sprite(100,128, 'faune', 'sprites/walk-down/walk-down-3.png')
         this.faune.body.setSize(this.faune.width * 0.5, this.faune.height * 0.8)
         
@@ -62,11 +66,36 @@ export default class Game extends Phaser.Scene
         
         this.physics.add.collider(this.faune, wallsLayer)
         this.physics.add.collider(lizards, wallsLayer)
+        this.physics.add.collider(lizards, this.faune, this.handlePlayerLizardCollision, undefined, this)
 
+    }
+
+    handlePlayerLizardCollision(obj1, obj2)
+    {
+        /**@type {Lizard} */
+        const lizard = obj2 
+        const dx = this.faune.x - lizard.x
+        const dy = this.faune.y - lizard.y
+
+        const dir = new Phaser.Math.Vector2(dx,dy).normalize().scale(200)
+
+        this.faune.setVelocity(dir.x, dir.y)
+
+        this.hit = 1
     }
 
     update(t, dt)
     {
+        if(this.hit > 0)
+        {
+            ++this.hit
+            if(this.hit > 10)
+            {
+                this.hit = 0
+            }
+           return 
+        }
+
         if(!this.cursors || !this.faune)
         {
             return
