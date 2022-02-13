@@ -1,7 +1,8 @@
-import Phaser from 'phaser'
+import Phaser, { GameObjects } from 'phaser'
 import { debugDraw } from '../utils/debug'
 import { createLizardAnims } from '../anims/EnemyAnims'
 import { createCharacterAnims } from '../anims/CharacterAnims'
+import Lizard from '../enemies/Lizard'
 
 export default class Game extends Phaser.Scene
 {
@@ -37,7 +38,7 @@ export default class Game extends Phaser.Scene
         wallsLayer.setCollisionByProperty({ collides: true})
 
         //DEBUG wall layer collider
-        debugDraw(wallsLayer, this)
+        //debugDraw(wallsLayer, this)
 
         this.faune = this.physics.add.sprite(100,128, 'faune', 'sprites/walk-down/walk-down-3.png')
         this.faune.body.setSize(this.faune.width * 0.5, this.faune.height * 0.8)
@@ -46,15 +47,21 @@ export default class Game extends Phaser.Scene
 
         this.faune.anims.play('faune-idle-down')
 
-        this.physics.add.collider(this.faune, wallsLayer)
 
         this.cameras.main.startFollow(this.faune, true)
 
         //Enemies
 
-        const lizard = this.physics.add.sprite(256, 236, 'lizard', 'lizard_m_idle_anim_f0.png')
+        const lizards = this.physics.add.group({
+            classType: Lizard
+        })
 
-        lizard.anims.play('lizard-run')
+
+        lizards.get(256, 236, 'lizard')
+
+        
+        this.physics.add.collider(this.faune, wallsLayer)
+        this.physics.add.collider(lizards, wallsLayer)
 
     }
 

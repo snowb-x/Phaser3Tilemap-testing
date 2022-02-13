@@ -26,6 +26,10 @@
     Texture packer
     https://www.codeandweb.com/texturepacker 
 
+# Tile extruder
+
+    https://github.com/sporadic-labs/tile-extruder 
+
 # Reconmmend Reading
 
     # Modular Game Worlds in Phaser 3 (Tilemaps#1) Static Maps
