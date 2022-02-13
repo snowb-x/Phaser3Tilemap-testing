@@ -10,12 +10,21 @@
         download link
         https://www.mapeditor.org/ 
 
+
     ## Tutorial link Phaser, Tilemaps and typscript
         i followed this tutorial to text tilemap in phaser but written the game in JavaScript instead of TypeScript. 
         https://www.youtube.com/watch?v=4u8ui2UoNCg 
 
         GitHub code 
         https://github.com/ourcade/phaser3-dungeon-crawler-starter 
+
+# texture packer
+
+    free texture packer
+    http://free-tex-packer.com/download/ 
+
+    Texture packer
+    https://www.codeandweb.com/texturepacker 
 
 # Reconmmend Reading
 
