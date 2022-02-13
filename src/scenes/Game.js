@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import { debugDraw } from '../utils/debug'
 
 export default class Game extends Phaser.Scene
 {
@@ -31,13 +32,8 @@ export default class Game extends Phaser.Scene
 
         wallsLayer.setCollisionByProperty({ collides: true})
 
-        //DEBUG wall collider 
-        const debugGraphics = this.add.graphics().setAlpha(0.75)
-        wallsLayer.renderDebug(debugGraphics, {
-            tileColor: null, //Colour of non-colliding tiles
-            collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255), // Color of colliding tiles
-            faceColor: new Phaser.Display.Color(40, 39, 37, 255) //Colour of colliding face edges
-        })
+        //DEBUG wall layer collider
+        debugDraw(wallsLayer, this)
 
         this.faune = this.physics.add.sprite(100,128, 'faune', 'sprites/walk-down/walk-down-3.png')
         this.faune.body.setSize(this.faune.width * 0.5, this.faune.height * 0.8)
@@ -81,6 +77,8 @@ export default class Game extends Phaser.Scene
         this.faune.anims.play('faune-idle-down')
 
         this.physics.add.collider(this.faune, wallsLayer)
+
+        this.cameras.main.startFollow(this.faune, true)
     }
 
     update(t, dt)
@@ -120,11 +118,10 @@ export default class Game extends Phaser.Scene
         }
         else
         {
-            this.faune.anims.play('faune-idle-down', true)
+            const parts = this.faune.anims.currentAnim.key.split('-')
+            parts[1] = 'idle'
+            this.faune.play(parts.join('-'))
             this.faune.setVelocity(0, 0)
-
-            this.faune.scaleX = 1
-            this.faune.body.setOffset(8,4)
         }
     }
 }
