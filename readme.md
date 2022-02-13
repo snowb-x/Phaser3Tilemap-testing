@@ -4,6 +4,12 @@
         updated libary in Phaser 3.5++ version onwards
         https://www.youtube.com/watch?v=4u8ui2UoNCg 
 
+        mapeditor doc
+        https://doc.mapeditor.org/en/stable/manual/automapping/ 
+
+        download link
+        https://www.mapeditor.org/ 
+
     ## Tutorial link Phaser, Tilemaps and typscript
         i followed this tutorial to text tilemap in phaser but written the game in JavaScript instead of TypeScript. 
         https://www.youtube.com/watch?v=4u8ui2UoNCg 

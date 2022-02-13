@@ -1,4 +1,3 @@
-import { World } from 'matter'
 import Phaser from 'phaser'
 
 export default class Game extends Phaser.Scene
