@@ -44,7 +44,6 @@ export default class Game extends Phaser.Scene
         //debugDraw(wallsLayer, this)
 
         this.faune = this.add.faune(100,128, 'faune')
-        this.faune = this.physics.add.sprite(100,128, 'faune', 'sprites/walk-down/walk-down-3.png')
         this.faune.body.setSize(this.faune.width * 0.5, this.faune.height * 0.8)
         
         createCharacterAnims(this.anims)
